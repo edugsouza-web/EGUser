@@ -1,0 +1,108 @@
+print('1-Cadastrar novo usuário:')  
+print('2-Apagar usuário:')
+print('3- Corrigir dados:')
+print('4-Sair')
+opcao = int(input('\nDigite qual opção deseja:'))
+
+
+if opcao == 1:
+  print('\n1-Primeiro usuário?')
+  opcao = str(input('Resposta:'))
+  if opcao == str('Sim' ):
+    print('\nDigite seu nome completo:')
+    nome = input()
+    print('\nDigite seu email:')
+    email = input()
+    print('\nDigite sua senha:')
+    senha = input()
+    print('\nDigite seu telefone:')
+    telefone = input()
+    print('\nDigite sua data de nascimento')
+    data_nascimento = input()
+    print("\nDigite seu CPF:")
+    cpf = input()
+    print('\nDigite sua cidade:')
+    cidade = input()
+    print('\nDigite seu estado:')
+    estado = input()
+    print('\nDigite seu endereço:')
+    endereço = input()
+    print('\nDigite seu sexo:')
+    sexo = input()
+
+
+    import random
+    numero_aleatorio = random.randint(1,500)
+    print('\n\nSeu ID é:',numero_aleatorio)
+    print('\n\nCadastro realizado com sucesso! ')
+  elif opcao == str('Não'):
+    print('Selecione uma opção!')
+    
+
+elif opcao == 2:
+  print('\nDigite o ID do usuário que deseja apagar:')
+  id = int(input())
+  print('\n\nUsuário apagado com sucesso!')
+
+elif opcao == 3:
+  print('\nDigite o ID do usuário que deseja corrigir:')
+  id = int(input())
+  print('\nDigite oq deseja corrigir:')
+  print('1-Nome')
+  print('2-Email')
+  print('3-Telefone')
+  print('4-Data de nascimento')
+  print('5-CPF')
+  print('6-Cidade')
+  print('7-Estado')
+  print('8-Endereço')
+  print('9-Sexo')
+
+  opcao = int(input())
+  if opcao ==1:
+    print('\nDigite o nome:')
+    nome = input()
+    print('\n\nDados alterados com sucesso!')
+
+  elif opcao ==2:
+    print('\nDigite o email:')
+    email = input()
+    print('\n\nDados alterados com sucesso!')
+
+  elif opcao==3:
+    print('\nDigite o telefone:')
+    telefone = input()
+    print('\n\nDados alterados com sucesso!')
+
+  elif opcao ==4:
+    print('\nDigite a data de nascimento:')
+    data = input()
+    print('\n\nDados alterados com sucesso!')
+
+  elif opcao == 5:
+    print('\nDigite o CPF:')
+    cpf = input()
+    print('\n\nDados alterados com sucesso!')
+
+  elif opcao == 6:
+    print('\nDigite a cidade:')
+    cidade = input()
+    print('\n\nDados alterados com sucesso!')
+
+  elif opcao == 7:
+    print('\nDigite o estado:')
+    estado = input()
+    print('\n\nDados alterados com sucesso!')
+
+  elif opcao == 8:
+    print('\nDigite o endereço:')
+    endereço = input()
+    print('\n\nDados alterados com sucesso!')
+
+  elif opcao == 9:
+    print('\nDigite o sexo:')
+    sexo = input()
+    print('\n\nDados alterados com sucesso!')
+  
+elif opcao == 4:
+  print('\nSaindo...Até mais!')
