@@ -1,0 +1,192 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct {
+    int id;
+    char nome[100];
+    char email[100];
+    char senha[100];
+    char telefone[20];
+    char data_nascimento[20];
+    char cpf[20];
+    char cidade[100];
+    char estado[100];
+    char endereco[200];
+    char sexo[10];
+} Usuario;
+
+Usuario* usuarios = NULL;
+int quantidadeUsuarios = 0;
+
+void cadastrarUsuario() {
+    quantidadeUsuarios++;
+    usuarios = realloc(usuarios, quantidadeUsuarios * sizeof(Usuario));
+    if (usuarios == NULL) {
+        printf("Erro ao alocar memória.\n");
+        exit(1);
+    }
+
+    Usuario* novoUsuario = &usuarios[quantidadeUsuarios - 1];
+    novoUsuario->id = rand() % 500 + 1;
+
+    printf("\nDigite seu nome completo: ");
+    scanf(" %[^\n]", novoUsuario->nome);
+    printf("\nDigite seu email: ");
+    scanf(" %[^\n]", novoUsuario->email);
+    printf("\nDigite sua senha: ");
+    scanf(" %[^\n]", novoUsuario->senha);
+    printf("\nDigite seu telefone: ");
+    scanf(" %[^\n]", novoUsuario->telefone);
+    printf("\nDigite sua data de nascimento: ");
+    scanf(" %[^\n]", novoUsuario->data_nascimento);
+    printf("\nDigite seu CPF: ");
+    scanf(" %[^\n]", novoUsuario->cpf);
+    printf("\nDigite sua cidade: ");
+    scanf(" %[^\n]", novoUsuario->cidade);
+    printf("\nDigite seu estado: ");
+    scanf(" %[^\n]", novoUsuario->estado);
+    printf("\nDigite seu endereco: ");
+    scanf(" %[^\n]", novoUsuario->endereco);
+    printf("\nDigite seu sexo: ");
+    scanf(" %[^\n]", novoUsuario->sexo);
+
+    printf("\n\nSeu ID é: %d\n", novoUsuario->id);
+    printf("Cadastro realizado com sucesso!\n");
+}
+
+void apagarUsuario() {
+    int id;
+    printf("\nDigite o ID do usuário que deseja apagar: ");
+    scanf("%d", &id);
+
+    for (int i = 0; i < quantidadeUsuarios; i++) {
+        if (usuarios[i].id == id) {
+            for (int j = i; j < quantidadeUsuarios - 1; j++) {
+                usuarios[j] = usuarios[j + 1];
+            }
+            quantidadeUsuarios--;
+            usuarios = realloc(usuarios, quantidadeUsuarios * sizeof(Usuario));
+            if (quantidadeUsuarios == 0) {
+                free(usuarios);
+                usuarios = NULL;
+            }
+            printf("Usuário apagado com sucesso!\n");
+            return;
+        }
+    }
+    printf("Usuário não encontrado!\n");
+}
+
+void corrigirDados() {
+    int id, opcao;
+    printf("\nDigite o ID do usuário que deseja corrigir: ");
+    scanf("%d", &id);
+
+    Usuario* usuario = NULL;
+    for (int i = 0; i < quantidadeUsuarios; i++) {
+        if (usuarios[i].id == id) {
+            usuario = &usuarios[i];
+            break;
+        }
+    }
+
+    if (usuario == NULL) {
+        printf("Usuário não encontrado!\n");
+        return;
+    }
+
+    printf("\nDigite o que deseja corrigir:\n");
+    printf("1-Nome\n");
+    printf("2-Email\n");
+    printf("3-Telefone\n");
+    printf("4-Data de nascimento\n");
+    printf("5-CPF\n");
+    printf("6-Cidade\n");
+    printf("7-Estado\n");
+    printf("8-Endereço\n");
+    printf("9-Sexo\n");
+
+    scanf("\n%d", &opcao);
+
+    switch (opcao) {
+        case 1:
+            printf("\nDigite o nome: ");
+            scanf(" %[^\n]", usuario->nome);
+            break;
+        case 2:
+            printf("\nDigite o email: ");
+            scanf(" %[^\n]", usuario->email);
+            break;
+        case 3:
+            printf("\nDigite o telefone: ");
+            scanf(" %[^\n]", usuario->telefone);
+            break;
+        case 4:
+            printf("\nDigite a data de nascimento: ");
+            scanf(" %[^\n]", usuario->data_nascimento);
+            break;
+        case 5:
+            printf("\nDigite o CPF: ");
+            scanf(" %[^\n]", usuario->cpf);
+            break;
+        case 6:
+            printf("\nDigite a cidade: ");
+            scanf(" %[^\n]", usuario->cidade);
+            break;
+        case 7:
+            printf("\nDigite o estado: ");
+            scanf(" %[^\n]", usuario->estado);
+            break;
+        case 8:
+            printf("\nDigite o endereço: ");
+            scanf(" %[^\n]", usuario->endereco);
+            break;
+        case 9:
+            printf("\nDigite o sexo: ");
+            scanf(" %[^\n]", usuario->sexo);
+            break;
+        default:
+            printf("Opção inválida!\n");
+            return;
+    }
+    printf("Dados alterados com sucesso!\n");
+}
+
+int main() {
+    usuarios = calloc(1, sizeof(Usuario));
+    if (usuarios == NULL) {
+        printf("Erro ao alocar memória.\n");
+        exit(1);
+    }
+
+    int opcao;
+    while (1) {
+        printf("\n1-Cadastrar novo usuário:\n");
+        printf("2-Apagar usuário:\n");
+        printf("3-Corrigir dados:\n");
+        printf("4-Sair\n");
+        printf("\nDigite qual opção deseja: ");
+        scanf("%d", &opcao);
+
+        switch (opcao) {
+            case 1:
+                cadastrarUsuario();
+                break;
+            case 2:
+                apagarUsuario();
+                break;
+            case 3:
+                corrigirDados();
+                break;
+            case 4:
+                printf("Saindo... Até mais!\n");
+                free(usuarios);
+                return 0;
+            default:
+                printf("Opção inválida! Tente novamente.\n");
+                break;
+        }
+    }
+    return 0;
+}
